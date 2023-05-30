@@ -33,7 +33,7 @@ class CreateTodoFragment : Fragment() {
 
         val btnAdd = view.findViewById<Button>(R.id.btnAdd)
         btnAdd.setOnClickListener {
-            val txtTitle =  view.findViewById<EditText>(R.id.txtTitle)
+            val txtTitle =  view.findViewById<EditText>(R.id.txtTitleTodo)
             val txtNotes = view.findViewById<EditText>(R.id.txtNotes)
 
             val todo = Model.Todo(txtTitle.text.toString(), txtNotes.text.toString())
