@@ -26,30 +26,30 @@ class CreateTodoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_todo, container, false)
+        return inflater.inflate(R.layout.fragment_create_todo, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(DetailTodoViewModel::class.java)
 
-//        val btnAdd = view.findViewById<Button>(R.id.btnAdd)
-//        btnAdd.setOnClickListener {
-//            val txtTitle =  view.findViewById<EditText>(R.id.txtTitleTodo)
-//            val txtNotes = view.findViewById<EditText>(R.id.txtNotes)
-//            var radioGroup = view.findViewById<RadioGroup>(R.id.radioGroupPriority)
-//            val checkedRadioButtonId = radioGroup.checkedRadioButtonId
-//
-//            val checkedRadioButton = view.findViewById<RadioButton>(checkedRadioButtonId)
-//            val selectedTag = checkedRadioButton.tag
-//
-//            val todo = Model.Todo(txtTitle.text.toString(), txtNotes.text.toString(), selectedTag.toString().toInt(), 0)
-//
-//            viewModel.addTodo(todo)
-//
-//            Toast.makeText(view.context, "TodoCreated", Toast.LENGTH_SHORT).show()
-//            Navigation.findNavController(it).popBackStack()
-//        }
+        val btnAdd = view.findViewById<Button>(R.id.btnAdd)
+        btnAdd.setOnClickListener {
+            val txtTitle =  view.findViewById<EditText>(R.id.txtTitleTodo)
+            val txtNotes = view.findViewById<EditText>(R.id.txtNotes)
+            var radioGroup = view.findViewById<RadioGroup>(R.id.radioGroupPriority)
+            val checkedRadioButtonId = radioGroup.checkedRadioButtonId
+
+            val checkedRadioButton = view.findViewById<RadioButton>(checkedRadioButtonId)
+            val selectedTag = checkedRadioButton.tag
+
+            val todo = Model.Todo(txtTitle.text.toString(), txtNotes.text.toString(), selectedTag.toString().toInt(), 0)
+
+            viewModel.addTodo(todo)
+
+            Toast.makeText(view.context, "TodoCreated", Toast.LENGTH_SHORT).show()
+            Navigation.findNavController(it).popBackStack()
+        }
 
     }
 
