@@ -8,16 +8,19 @@
     tools:context=".view.CreateTodoFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:id="@+id/txtTodo"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:text="@string/newTodo"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtInputLayoutTitle"
@@ -73,6 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtInputLayoutNotes" />
 
     <RadioGroup
+        android:id="@+id/radioGroupPriority"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -80,26 +84,29 @@
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtInputLayoutNotes" >
+        app:layout_constraintTop_toBottomOf="@+id/txtInputLayoutNotes">
 
         <RadioButton
             android:id="@+id/radioHigh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/highpriority"
-            />
+            android:checked="true"
+            android:tag="3"
+            android:text="@string/highpriority" />
 
         <RadioButton
             android:id="@+id/radioMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:tag="2"
             android:text="@string/mediumpriority" />
 
         <RadioButton
             android:id="@+id/radioLow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton" />
+            android:tag="1"
+            android:text="Low Priority" />
     </RadioGroup>
 
 

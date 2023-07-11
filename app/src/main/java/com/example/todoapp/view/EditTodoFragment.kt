@@ -1,7 +1,7 @@
 package com.example.todoapp.view
 
+import android.app.Fragment
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -17,10 +18,9 @@ import com.example.todoapp.model.Model
 import com.example.todoapp.viewmodel.DetailTodoViewModel
 
 
-class CreateTodoFragment : Fragment() {
+class EditTodoFragment : androidx.fragment.app.Fragment() {
+    private lateinit var viewModel: DetailTodoViewModel
 
-    private lateinit var viewModel:DetailTodoViewModel
-//    private init var viewModel:DetailTodoViewModel = ?null;
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +34,16 @@ class CreateTodoFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(DetailTodoViewModel::class.java)
 
         val btnAdd = view.findViewById<Button>(R.id.btnAdd)
-        btnAdd.setOnClickListener {
+        val txtTitle =  view.findViewById<TextView>(R.id.txtTodo)
+
+        txtTitle.text = "Edit Todo"
+        btnAdd.text = "Save Changes"
+
+        val uuid = EditTodoFragmentArgs.fromBundle(requireArguments()).uuid
+        viewModel.fetch(uuid)
+        observeViewModel()
+
+        btnAdd.setOnClickListener{
             val txtTitle =  view.findViewById<EditText>(R.id.txtTitleTodo)
             val txtNotes = view.findViewById<EditText>(R.id.txtNotes)
             var radioGroup = view.findViewById<RadioGroup>(R.id.radioGroupPriority)
@@ -43,14 +52,24 @@ class CreateTodoFragment : Fragment() {
             val checkedRadioButton = view.findViewById<RadioButton>(checkedRadioButtonId)
             val selectedTag = checkedRadioButton.tag
 
-            val todo = Model.Todo(txtTitle.text.toString(), txtNotes.text.toString(), selectedTag.toString().toInt(), 0)
+            viewModel.update(uuid,txtTitle.text.toString(),txtNotes.text.toString(), selectedTag.toString().toInt())
 
-            viewModel.addTodo(todo)
-
-            Toast.makeText(view.context, "TodoCreated", Toast.LENGTH_SHORT).show()
+            Toast.makeText(view.context, "Todo Updated", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(it).popBackStack()
         }
 
     }
+
+    private fun observeViewModel() {
+        viewModel.todoLD.observe(viewLifecycleOwner){
+            val txtNotes = view?.findViewById<EditText>(R.id.txtNotes)
+            val txtTitle = view?.findViewById<EditText>(R.id.txtTitleTodo)
+
+            txtTitle?.setText(it.title)
+            txtNotes?.setText(it.notes)
+
+        }
+    }
+
 
 }

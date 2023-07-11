@@ -42,7 +42,8 @@ class ListTodoViewModel(application: Application) : AndroidViewModel(application
                 val db = Room.databaseBuilder(
                     getApplication(),
                     TodoDatabase::class.java, "newtododb").build()
-                db.todoDao().deleteTodo(todo)
+//                db.todoDao().deleteTodo(todo)
+                db.todoDao().updateIsDone(todo.uuid, 1)
 
                 todoLD.postValue(db.todoDao().selectAllTodo())
             }
