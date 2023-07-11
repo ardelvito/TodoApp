@@ -9,9 +9,10 @@ plugins {
 android {
     compileSdk 33
 
-    buildFeatures {
-        dataBinding true
+    dataBinding {
+        enabled true
     }
+
 
     defaultConfig {
         applicationId "com.example.todoapp"
