@@ -15,6 +15,9 @@ interface TodoDao {
     @Query("UPDATE todo SET title =:title, notes=:notes, priority=:priority WHERE uuid= :id")
     fun update(id:Int, title:String, notes:String, priority: Int)
 
+    @Update
+    suspend fun updateTodoObj(todo: Model.Todo)
+
     @Delete
     fun deleteTodo(todo: Model.Todo)
 

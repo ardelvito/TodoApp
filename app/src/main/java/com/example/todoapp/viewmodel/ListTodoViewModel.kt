@@ -31,7 +31,7 @@ class ListTodoViewModel(application: Application) : AndroidViewModel(application
 //                val db = Room.databaseBuilder(
 //                    getApplication(),
 //                    TodoDatabase::class.java, "newtododb").build()
-                val db = buildDB(getApplication())
+                               val db = buildDB(getApplication())
 
                 todoLD.postValue(db.todoDao().selectAllTodo())
             }
